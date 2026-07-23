@@ -1,51 +1,76 @@
-<script setup>
-import { reactive } from 'vue'
+<!-- <script setup>
+import { ref , computed} from 'vue';
 
-const genderList = ['Male', 'Female', 'UnIdentify']
-const interestList = ['Sport', 'Reading', 'Politics', 'Game']
+const firstName = ref('')
+const lastName = ref('')
 
-const submitForm =  ()=>{
-  console.log('Submit')
-  console.log(formData)
-}
-
-const formData = reactive({
-  firstName: '',
-  lastName: '',
-  gender: '',
-  interests: [],
-  description: ''
+// copmputed ใช้กับตัวแปร reactive
+// computed เก็บ cache ไว้ในตัวแปร
+const fullName = computed(() => {
+  return `${firstName.value} ${lastName.value}`
 })
+
+const now = computed(() => Date.now())
+
+// const newFullName = () => {
+//   return `${firstName.value} ${lastName.value}`
+// }
+</script> -->
+
+
+<!--<template>
+  <div>
+    {{ fullName }}
+    {{ now }}
+    {{ newFullName() }}
+  </div>
+  <div>
+    Firstname<input type="text" v-model="firstName">
+    Lastname<input type="text" v-model="lastName">
+  </div>
+  </template>-->
+
+
+  <!-- Exchange Money -->
+  <!-- <script setup>
+  import { ref, computed } from 'vue';
+  const priceUSD = ref(1)
+  const exchangeRate = 35
+  const priceTHB = computed({
+    get: () => {
+      return priceUSD.value * exchangeRate
+    },
+    set: (newValue) => {
+      priceUSD.value = (newValue/ exchangeRate)
+    }
+  })
+
 </script>
+
 <template>
   <div>
-    <div>
-      <div>First Name</div>
-      <input type="text" name="firstName" v-model="formData.firstName">
-    </div>
-    <div>
-      <div>Last Name</div>
-      <input type="text" name="lastName" v-model="formData.lastName">
-    </div>
-    <div>
-      <div>
-        <div>Gender</div>
-        <div v-for="gender in genderList">
-          <!-- v-bind:something = attribute binding  short = :something-->
-          <input type="radio" name="gender" :value="gender" v-model="formData.gender">
-          {{ gender }}
-        </div>
-        <div>
-          <div>interestList</div>
-          <div v-for="interest in interestList">
-            <input type="checkbox" name="interest" v-bind:value="interest" v-model="formData.interests">
-            {{ interest }}
-          </div>
-        </div>
-      </div>
-      <div>Description</div>
-      <textarea v-model="formData.description"></textarea>
-    </div>
-    <button @click="submitForm()">Submit</button>
+  USD {{ priceUSD }} = THB {{ priceTHB }}
   </div>
+  <div>
+    THB <input type="text" v-model="priceTHB">
+    USD <input type="text" v-model="priceUSD">
+  </div>
+</template> -->
+
+<!-- Watcher -->
+ <script setup>
+import { ref, computed } from 'vue';
+
+const upperFullname = computed(()=> {
+  return fullname.value.toUpperCase()
+})
+
+const fullname = ref('')
+</script>
+
+<template>
+<div>
+  <div> Fullname: {{ upperFullname }}</div>
+  <input type="text" v-model="fullname">
+</div>
 </template>
